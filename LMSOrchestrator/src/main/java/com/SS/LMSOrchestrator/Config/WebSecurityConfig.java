@@ -41,7 +41,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	//configures authentication manager, 
 	public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(jwtUserDetailService).passwordEncoder(passwordEncoder());
+		auth.userDetailsService(jwtUserDetailService).passwordEncoder(passwordEncoder())
+			.and()
+			.inMemoryAuthentication()
+			.withUser("admin")
+			.password("admin")
+			.roles("ADMIN")
+			.and().withUser("john")
+			.password("fake")
+			.roles("BORROWER")
+			.and().withUser("nancy")
+			.password("nanny")
+			.roles("LIBRARIAN");
 	}
 	
 	@Bean
@@ -56,31 +67,33 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	
 
-	@Override
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication()
-			.withUser("ADMIN")
-			.password("admin")
-			.roles("Admin")
-			.and().withUser("john")
-			.password("fake")
-			.roles("Borrower")
-			.and().withUser("Nancy")
-			.password("nanny")
-			.roles("Librarian");
-	}
+//	@Override
+//	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+//		auth.inMemoryAuthentication()
+//			.withUser("admin")
+//			.password("admin")
+//			.roles("ADMIN")
+//			.and().withUser("john")
+//			.password("fake")
+//			.roles("BORROWER")
+//			.and().withUser("nancy")
+//			.password("nanny")
+//			.roles("LIBRARIAN");
+//	}
+//	
 	
 	
-
+	
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		//permits access to /authenticate to everyone
-		http.authorizeRequests().antMatchers("/authenticate").permitAll()
+		http.csrf().disable().
+		authorizeRequests().antMatchers("/authenticate").permitAll()
 		//sets up authentcation for our micro services
-		.antMatchers("/admin/*").hasRole("Admin")
-		.antMatchers("/borrower/*").hasAnyRole("Admin","Borrower","Librarian")
-		.antMatchers("/librarian/*").hasAnyRole("Admin","Librarian")
+		.antMatchers("/admin/*").hasRole("ADMIN")
+		.antMatchers("/borrower/*").hasAnyRole("ADMIN","BORROWER","LIBRARIAN")
+		.antMatchers("/librarian/*").hasAnyRole("ADMIN","LIBRARIAN")
 		.anyRequest().authenticated().and()
 		//sets up error to entrypoint
 		.exceptionHandling().authenticationEntryPoint(entryPoint)
@@ -88,6 +101,12 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 		.and().sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 		//add filter to validate the tokens with every request
 		.and().addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+		
+	}
+
+	@Override
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/authenticate");
 	}
 	
 	

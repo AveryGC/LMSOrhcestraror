@@ -22,7 +22,7 @@ public class JwtTokenUtil implements Serializable{
 	 */
 	private static final long serialVersionUID = -5442306768470375097L;
 	
-	public static final long JWT_TOKEN_VALIDITY= 7;
+	public static final long JWT_TOKEN_VALIDITY= 7*50*40*80000;
 	
 	@Value("${jwt.secret}")
 	private String secret;
@@ -67,7 +67,7 @@ public class JwtTokenUtil implements Serializable{
 	//validate token
 	public Boolean validateToken(String token, UserDetails userDetials) {
 		String username = getUsernameFromTaken(token);
-		return (username.equals(userDetials.getUsername())&& !!isTokenExpired(token));
+		return (username.equals(userDetials.getUsername())&& !isTokenExpired(token));
 	}
 	
 

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SS.LMSOrchestrator.Config.JwtTokenUtil;
+import com.SS.LMSOrchestrator.Service.JwtUserDetailsService;
 import com.SS.LMSOrchestrator.model.JwtRequest;
 import com.SS.LMSOrchestrator.model.JwtResponse;
 
@@ -38,13 +39,16 @@ public class JwtAuthenticationController {
 	private JwtTokenUtil jwtTokenUtil;
 	
 	@Autowired 
-	private UserDetailsService userDetailService;
+	private JwtUserDetailsService userDetailService;
 	
 	@PostMapping(value = "/authenticate")
-	public ResponseEntity<?>  creatAuthenticationToken(@RequestBody @Valid JwtRequest request) throws Exception{
+	public ResponseEntity<?>  creatAuthenticationToken(@RequestBody JwtRequest request) throws Exception{
 
+//		System.out.println("Made it here1");
 		final UserDetails userDetails = userDetailService.loadUserByUsername(request.getUsername());
+//		System.out.println("Made it here2");
 		authenticate(request.getUsername(), request.getPassword());
+//		System.out.println("Made it here3");
 		final String token = jwtTokenUtil.genrateToken(userDetails);
 		
 		return ResponseEntity.ok(new JwtResponse(token));

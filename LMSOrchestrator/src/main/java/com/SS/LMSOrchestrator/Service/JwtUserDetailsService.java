@@ -31,31 +31,30 @@ public class JwtUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = null;
-		if(username=="ADMIN") {
-			user = new User();
-			user.setUsername("ADMIN");
+		User user = new User();
+		user.setUsername(null);
+		if(username.equals("admin")) {
+			user.setUsername("admin");
 			user.setPassword("admin");
-			user.setRoles(new String[] {"Admin"} );
+			user.setRoles(new String[] {"ADMIN"} );
 		}
-		if(username=="john") {
-			user = new User();
+		if(username.equals("john")) {
 			user.setUsername("john");
 			user.setPassword("fake");
-			user.setRoles(new String[] {"Borrower"} );
+			user.setRoles(new String[] {"BORROWER"} );
 		}
-		if(username=="Nancy") {
-			user = new User();
-			user.setUsername("Nancy");
+		if(username.equals("nancy")) {
+			user.setUsername("nancy");
 			user.setPassword("nanny");
-			user.setRoles(new String[] {"Librarian"} );
+			user.setRoles(new String[] {"LIBRARIAN"} );
 		}
 		
 		
 		UserBuilder builder = null;
-	    if (user != null) {
+	    if (user.getUsername() != null) {
 	      builder = org.springframework.security.core.userdetails.User.withUsername(username);
 	      builder.password(new BCryptPasswordEncoder().encode(user.getPassword()));
+//	      builder.password(user.getPassword());
 	      builder.roles(user.getRoles());
 	    } else {
 	      throw new UsernameNotFoundException("User not found.");
