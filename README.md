@@ -1,2 +1,0 @@
-# LMSOrhcestraror
-LMS Eureka Server
