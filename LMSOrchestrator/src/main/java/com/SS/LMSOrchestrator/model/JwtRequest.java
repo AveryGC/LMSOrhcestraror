@@ -5,6 +5,10 @@ package com.SS.LMSOrchestrator.model;
 
 import java.io.Serializable;
 
+import javax.validation.constraints.NotBlank;
+
+import org.hibernate.validator.constraints.Length;
+
 /**
  * @author acorb
  *
@@ -16,7 +20,11 @@ public class JwtRequest implements Serializable{
 	 */
 	private static final long serialVersionUID = 7811036747321634921L;
 	
+	@NotBlank
+	@Length(min = 3)
 	private String username;
+	@NotBlank
+	@Length(min = 3)
 	private String password;
 	
 	//For serialization

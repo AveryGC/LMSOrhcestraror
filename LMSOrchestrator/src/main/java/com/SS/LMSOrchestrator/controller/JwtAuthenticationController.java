@@ -3,6 +3,8 @@
  */
 package com.SS.LMSOrchestrator.controller;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,7 +40,7 @@ public class JwtAuthenticationController {
 	private JwtUserDetailsService userDetailService;
 	
 	@PostMapping(value = "lmsmain/authenticate")
-	public ResponseEntity<?>  creatAuthenticationToken(@RequestBody JwtRequest request) throws Exception{
+	public ResponseEntity<?>  creatAuthenticationToken(@RequestBody @Valid JwtRequest request) throws Exception{
 
 //		System.out.println("Made it here1");
 		final UserDetails userDetails = userDetailService.loadUserByUsername(request.getUsername());

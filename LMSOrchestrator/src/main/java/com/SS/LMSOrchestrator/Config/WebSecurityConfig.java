@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 			.password("fake")
 			.roles("BORROWER")
 			.and().withUser("nancy")
-			.password("nanny")
+			.password("nancy")
 			.roles("LIBRARIAN");
 	}
 	
@@ -69,11 +69,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		//permits access to /authenticate to everyone
 		http.csrf().disable().
-		authorizeRequests().antMatchers("/authenticate").permitAll()
+		authorizeRequests().antMatchers("/lmsmain/authenticate").permitAll()
 		//sets up authentcation for our micro services
-		.antMatchers("/admin/*").hasRole("ADMIN")
-		.antMatchers("/borrower/*").hasAnyRole("ADMIN","BORROWER","LIBRARIAN")
-		.antMatchers("/librarian/*").hasAnyRole("ADMIN","LIBRARIAN")
+		.antMatchers("/lmsmain/admin/*").hasRole("ADMIN")
+		.antMatchers("/lmsmain/borrower/*").hasAnyRole("ADMIN","BORROWER","LIBRARIAN")
+		.antMatchers("/lmsmain/librarian/*").hasAnyRole("ADMIN","LIBRARIAN")
 		.anyRequest().authenticated().and()
 		//sets up error to entrypoint
 		.exceptionHandling().authenticationEntryPoint(entryPoint)
@@ -86,7 +86,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/authenticate");
+		web.ignoring().antMatchers("/lmsmain/authenticate");
 	}
 	
 	

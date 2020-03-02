@@ -35,7 +35,7 @@ public class JwtUserDetailsService implements UserDetailsService {
 		}
 		if(username.equals("nancy")) {
 			user.setUsername("nancy");
-			user.setPassword("nanny");
+			user.setPassword("nancy");
 			user.setRoles(new String[] {"LIBRARIAN"} );
 		}
 		

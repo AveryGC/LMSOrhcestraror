@@ -36,7 +36,7 @@ public class JSONController {
 		if(request.getMethod().equalsIgnoreCase("POST"))
 			meth = HttpMethod.POST;
 		String newPath = "http://lms-admin/" +request.getRequestURI().substring(8);
-		return restTemplate.exchange(newPath, meth, new HttpEntity<Object>(body,header),Object.class);
+		 return restTemplate.exchange(newPath, meth, new HttpEntity<Object>(body,header),Object.class);
 	}
 	@RequestMapping(path = "/admin/**", method= {RequestMethod.GET, RequestMethod.DELETE},produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes  ={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
