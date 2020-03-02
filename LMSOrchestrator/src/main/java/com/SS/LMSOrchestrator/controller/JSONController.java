@@ -6,10 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
+@RequestMapping(path= "lmsmain")
 public class JSONController {
 	
 	@Autowired
@@ -28,7 +27,7 @@ public class JSONController {
 //		return new ResponseEntity<String>("Success", HttpStatus.OK);
 //	}
 	
-	@RequestMapping(path = "lmsmain/admin/**", method= {RequestMethod.POST, RequestMethod.PUT},produces = MediaType.APPLICATION_JSON_VALUE,
+	@RequestMapping(path = "/admin/**", method= {RequestMethod.POST, RequestMethod.PUT},produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes ={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Object> adminRequest(HttpServletRequest request, @RequestBody Object body, @RequestHeader HttpHeaders header){
 		HttpMethod meth = null;
@@ -39,7 +38,7 @@ public class JSONController {
 		String newPath = "http://lms-admin/" +request.getRequestURI().substring(8);
 		return restTemplate.exchange(newPath, meth, new HttpEntity<Object>(body,header),Object.class);
 	}
-	@RequestMapping(path = "lmsmain/admin/**", method= {RequestMethod.GET, RequestMethod.DELETE},produces = MediaType.APPLICATION_JSON_VALUE,
+	@RequestMapping(path = "/admin/**", method= {RequestMethod.GET, RequestMethod.DELETE},produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes  ={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Object> adminRequest(HttpServletRequest request,@RequestHeader HttpHeaders header){
 		HttpMethod meth = null;
@@ -51,7 +50,7 @@ public class JSONController {
 		return restTemplate.exchange(newPath, meth, new HttpEntity<Object>(header),Object.class);
 	}
 	
-	@RequestMapping(path = "lmsmain/borrower/**", method= {RequestMethod.POST, RequestMethod.PUT},produces = MediaType.APPLICATION_JSON_VALUE,
+	@RequestMapping(path = "/borrower/**", method= {RequestMethod.POST, RequestMethod.PUT},produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes ={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Object> borrowerRequest(HttpServletRequest request, @RequestBody Object body, @RequestHeader HttpHeaders header){
 		HttpMethod meth = null;
@@ -63,7 +62,7 @@ public class JSONController {
 		
 		return restTemplate.exchange(newPath, meth, new HttpEntity<Object>(body,header),Object.class);
 	}
-	@RequestMapping(path = "lmsmain/borrower/**", method= {RequestMethod.GET, RequestMethod.DELETE},produces = MediaType.APPLICATION_JSON_VALUE,
+	@RequestMapping(path = "/borrower/**", method= {RequestMethod.GET, RequestMethod.DELETE},produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes ={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Object> borrowerRequest(HttpServletRequest request, @RequestHeader HttpHeaders header){
 		HttpMethod meth = null;
@@ -76,7 +75,7 @@ public class JSONController {
 		return restTemplate.exchange(newPath, meth, new HttpEntity<Object>(header),Object.class);
 	}
 	
-	@RequestMapping(path = "lmsmain/librarian/**", method= {RequestMethod.POST, RequestMethod.PUT},produces = MediaType.APPLICATION_JSON_VALUE,
+	@RequestMapping(path = "/librarian/**", method= {RequestMethod.POST, RequestMethod.PUT},produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes ={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Object> librarianRequest(HttpServletRequest request, @RequestBody Object body,@RequestHeader HttpHeaders header){
 		HttpMethod meth = null;
@@ -88,7 +87,7 @@ public class JSONController {
 		
 		return restTemplate.exchange(newPath, meth, new HttpEntity<Object>(body,header),Object.class);
 	}
-	@RequestMapping(path = "lmsmain/librarian/**", method= {RequestMethod.GET, RequestMethod.DELETE},produces = MediaType.APPLICATION_JSON_VALUE,
+	@RequestMapping(path = "/librarian/**", method= {RequestMethod.GET, RequestMethod.DELETE},produces = MediaType.APPLICATION_JSON_VALUE,
 			consumes ={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Object> librarianRequest(HttpServletRequest request, @RequestHeader HttpHeaders header){
 		HttpMethod meth = null;

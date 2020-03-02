@@ -3,8 +3,6 @@
  */
 package com.SS.LMSOrchestrator.controller;
 
-import javax.validation.Valid;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -12,11 +10,9 @@ import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.SS.LMSOrchestrator.Config.JwtTokenUtil;
@@ -41,7 +37,7 @@ public class JwtAuthenticationController {
 	@Autowired 
 	private JwtUserDetailsService userDetailService;
 	
-	@PostMapping(value = "/authenticate")
+	@PostMapping(value = "lmsmain/authenticate")
 	public ResponseEntity<?>  creatAuthenticationToken(@RequestBody JwtRequest request) throws Exception{
 
 //		System.out.println("Made it here1");

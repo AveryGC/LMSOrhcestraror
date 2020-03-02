@@ -3,14 +3,11 @@
  */
 package com.SS.LMSOrchestrator.model;
 
-import java.util.List;
-
 /**
  * @author acorb
  *
  */
-//Currently No used
-public class User {
+public class UserDB {
 	private String username;
 	private String password;
 	private String[] roles;
