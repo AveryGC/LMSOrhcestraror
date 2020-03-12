@@ -16,11 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
+@RequestMapping(path= "lmsmain")
 public class XMLController {
 	@Autowired
 	RestTemplate restTemplate;
 
-	@RequestMapping(path = "lmsmain/admin/**", method= {RequestMethod.POST, RequestMethod.PUT}, produces = MediaType.APPLICATION_XML_VALUE,
+	@RequestMapping(path = "/admin/**", method= {RequestMethod.POST, RequestMethod.PUT}, produces = MediaType.APPLICATION_XML_VALUE,
 			consumes ={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Object[]> adminRequest(HttpServletRequest request, @RequestBody Object body, @RequestHeader HttpHeaders header){
 //		HttpHeaders headers = new HttpHeaders();
@@ -35,7 +36,7 @@ public class XMLController {
 		
 		return restTemplate.exchange(newPath, meth, new HttpEntity<Object>(body,header),Object[].class);
 	}
-	@RequestMapping(path = "lmsmain/admin/**", method= {RequestMethod.GET, RequestMethod.DELETE}, produces = MediaType.APPLICATION_XML_VALUE,
+	@RequestMapping(path = "/admin/**", method= {RequestMethod.GET, RequestMethod.DELETE}, produces = MediaType.APPLICATION_XML_VALUE,
 			consumes ={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Object[]> adminRequest(HttpServletRequest request,@RequestHeader HttpHeaders header){
 //		HttpHeaders headers = new HttpHeaders();
@@ -50,7 +51,7 @@ public class XMLController {
 		return restTemplate.exchange(newPath, meth, new HttpEntity<Object>(header),Object[].class);
 	}
 	
-	@RequestMapping(path = "lmsmain/borrower/**", method= {RequestMethod.POST, RequestMethod.PUT}, produces = MediaType.APPLICATION_XML_VALUE,
+	@RequestMapping(path = "/borrower/**", method= {RequestMethod.POST, RequestMethod.PUT}, produces = MediaType.APPLICATION_XML_VALUE,
 			consumes ={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Object[]> borrowerRequest(HttpServletRequest request, @RequestBody Object body, @RequestHeader HttpHeaders header){
 //		HttpHeaders headers = new HttpHeaders();
@@ -65,7 +66,7 @@ public class XMLController {
 		
 		return restTemplate.exchange(newPath, meth, new HttpEntity<Object>(body,header),Object[].class);
 	}
-	@RequestMapping(path = "lmsmain/borrower/**", method= {RequestMethod.GET, RequestMethod.DELETE}, produces = MediaType.APPLICATION_XML_VALUE,
+	@RequestMapping(path = "/borrower/**", method= {RequestMethod.GET, RequestMethod.DELETE}, produces = MediaType.APPLICATION_XML_VALUE,
 			consumes ={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Object[]> borrowerRequest(HttpServletRequest request, @RequestHeader HttpHeaders header){
 //		HttpHeaders headers = new HttpHeaders();
@@ -82,7 +83,7 @@ public class XMLController {
 		return restTemplate.exchange(newPath, meth, new HttpEntity<Object>(header),Object[].class);
 	}
 	
-	@RequestMapping(path = "lmsmain/librarian/**", method= {RequestMethod.POST, RequestMethod.PUT}, produces = MediaType.APPLICATION_XML_VALUE,
+	@RequestMapping(path = "/librarian/**", method= {RequestMethod.POST, RequestMethod.PUT}, produces = MediaType.APPLICATION_XML_VALUE,
 			consumes ={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Object[]> librarianRequest(HttpServletRequest request, @RequestBody Object body,@RequestHeader HttpHeaders header){
 //		HttpHeaders headers = new HttpHeaders();
@@ -97,7 +98,7 @@ public class XMLController {
 		
 		return restTemplate.exchange(newPath, meth, new HttpEntity<Object>(body,header),Object[].class);
 	}
-	@RequestMapping(path = "lmsmain/librarian/**", method= {RequestMethod.GET, RequestMethod.DELETE}, produces = MediaType.APPLICATION_XML_VALUE,
+	@RequestMapping(path = "/librarian/**", method= {RequestMethod.GET, RequestMethod.DELETE}, produces = MediaType.APPLICATION_XML_VALUE,
 			consumes ={MediaType.APPLICATION_JSON_VALUE, MediaType.APPLICATION_XML_VALUE })
 	public ResponseEntity<Object[]> librarianRequest(HttpServletRequest request, @RequestHeader HttpHeaders header){
 //		HttpHeaders headers = new HttpHeaders();
